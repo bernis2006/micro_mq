@@ -1,0 +1,49 @@
+27 de febrero de 2024, 16:25:48 CST[DispatchThread: [com.ibm.mq.jmqi.remote.impl.RemoteSession[:/72b395e7][connectionId=414D51435158534D4E54442020202020CF54CC65155CAC40,traceIdentifier=2,remoteTraceIdentifier=-1]]] com.ibm.msg.client.wmq.internal.WMQConnection
+Se ha hecho caso omiso de la excepción ya que no hay ningún escucha de excepciones registrado: '
+                       Mensaje : com.ibm.msg.client.jms.DetailedJMSException: JMSWMQ1107: Ha surgido un problema con esta conexión.
+Se ha producido un error con la conexión JMS de IBM MQ.
+Utilice la excepción enlazada para determinar la causa de este error.
+                         Clase : class com.ibm.msg.client.jms.DetailedJMSException
+                          Pila : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:595)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:215)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:217)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:273)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:686)
+                               : com.ibm.mq.jmqi.remote.impl.RemoteProxyQueue.callConsumer(RemoteProxyQueue.java:3786)
+                               : com.ibm.mq.jmqi.remote.impl.RemoteProxyQueue.processEvent(RemoteProxyQueue.java:4928)
+                               : com.ibm.mq.jmqi.remote.impl.RemoteProxyQueue.driveConsumer(RemoteProxyQueue.java:4749)
+                               : com.ibm.mq.jmqi.remote.impl.RemoteProxyQueue.deliverMsgs(RemoteProxyQueue.java:5344)
+                               : com.ibm.mq.jmqi.remote.impl.RemoteDispatchThread.deliverMsgsReconnectable(RemoteDispatchThread.java:557)
+                               : com.ibm.mq.jmqi.remote.impl.RemoteDispatchThread.deliverMsgs(RemoteDispatchThread.java:531)
+                               : com.ibm.mq.jmqi.remote.impl.RemoteDispatchThread.run(RemoteDispatchThread.java:305)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.runTask(WorkQueueItem.java:319)
+                               : com.ibm.msg.client.commonservices.workqueue.SimpleWorkQueueItem.runItem(SimpleWorkQueueItem.java:99)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.run(WorkQueueItem.java:343)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueManager.runWorkQueueItem(WorkQueueManager.java:312)
+                               : com.ibm.msg.client.commonservices.j2se.workqueue.WorkQueueManagerImplementation$ThreadPoolWorker.run(WorkQueueManagerImplementation.java:1240)
+     Se debe a [1] --> Mensaje : com.ibm.mq.MQException: JMSCMQ0001: La llamada de IBM MQ ha fallado con código de terminación '2' ('MQCC_FAILED') razón '2009' ('MQRC_CONNECTION_BROKEN').
+                         Clase : class com.ibm.mq.MQException
+                          Pila : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:203)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:217)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:273)
+                               : com.ibm.msg.client.wmq.internal.WMQAsyncConsumerShadow.consumer(WMQAsyncConsumerShadow.java:686)
+                               : com.ibm.mq.jmqi.remote.impl.RemoteProxyQueue.callConsumer(RemoteProxyQueue.java:3786)
+                               : com.ibm.mq.jmqi.remote.impl.RemoteProxyQueue.processEvent(RemoteProxyQueue.java:4928)
+                               : com.ibm.mq.jmqi.remote.impl.RemoteProxyQueue.driveConsumer(RemoteProxyQueue.java:4749)
+                               : com.ibm.mq.jmqi.remote.impl.RemoteProxyQueue.deliverMsgs(RemoteProxyQueue.java:5344)
+                               : com.ibm.mq.jmqi.remote.impl.RemoteDispatchThread.deliverMsgsReconnectable(RemoteDispatchThread.java:557)
+                               : com.ibm.mq.jmqi.remote.impl.RemoteDispatchThread.deliverMsgs(RemoteDispatchThread.java:531)
+                               : com.ibm.mq.jmqi.remote.impl.RemoteDispatchThread.run(RemoteDispatchThread.java:305)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.runTask(WorkQueueItem.java:319)
+                               : com.ibm.msg.client.commonservices.workqueue.SimpleWorkQueueItem.runItem(SimpleWorkQueueItem.java:99)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueItem.run(WorkQueueItem.java:343)
+                               : com.ibm.msg.client.commonservices.workqueue.WorkQueueManager.runWorkQueueItem(WorkQueueManager.java:312)
+                               : com.ibm.msg.client.commonservices.j2se.workqueue.WorkQueueManagerImplementation$ThreadPoolWorker.run(WorkQueueManagerImplementation.java:1240)
+'.
+
+EXPLICACIÓN:
+Se ha intentado enviar una excepción al escucha de excepciones de la conexión pero no se había registrado un escucha.
+
+ACCIÓN:
+Debe registrarse un escucha de excepciones con la conexión para recibir sus excepciones.
+--------------------------------------------------------------------
